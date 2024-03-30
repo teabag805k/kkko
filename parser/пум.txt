@@ -1,0 +1,100 @@
+После того, как текст был преобразован в векторное представление с помощью метода TF-IDF, можно использовать эти признаки для выявления тенденций в тексте. Для этого часто используются методы машинного обучения, такие как классификация или кластеризация. 
+
+Ниже приведен пример того, как можно использовать векторное представление текста с помощью TF-IDF для классификации текста на два класса (положительный и отрицательный):
+
+from sklearn.model_selection import train_test_split
+from sklearn.svm import SVC
+from sklearn.metrics import accuracy_score
+
+# Предположим, что у нас есть метки класса для каждого текста
+labels = [1, 0, 1]
+
+# Разделение данных на обучающий и тестовый наборы
+X_train, X_test, y_train, y_test = train_test_split(tfidf_matrix, labels, test_size=0.2, random_state=42)
+
+# Обучение модели на обучающем наборе
+model = SVC(kernel='linear')
+model.fit(X_train, y_train)
+
+# Предсказание меток класса на тестовом наборе
+y_pred = model.predict(X_test)
+
+# Оценка точности модели
+accuracy = accuracy_score(y_test, y_pred)
+print("Accuracy:", accuracy)
+
+
+В этом примере мы используем метод опорных векторов (SVM) для обучения модели на векторном представлении текста и предсказания меток класса на тестовом наборе. Наконец, мы оцениваем точность модели.
+
+Таким образом, преобразование текста в векторное представление с использованием TF-IDF и последующее использование этих признаков с помощью методов машинного обучения позволяет выявлять тенденции в тексте и выполнять различные задачи анализа текста.
+
+
+
+
+
+Для преобразования текста в векторное представление с использованием метода TF-IDF на Python можно воспользоваться библиотекой scikit-learn. Ниже приведен пример кода, демонстрирующий преобразование текста в векторное представление с использованием TF-IDF:
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+
+# Пример текста
+text = [
+    "Это пример текста для TF-IDF преобразования",
+    "TF-IDF - это метод векторизации текста",
+    "TF-IDF позволяет оценить важность слов в тексте"
+]
+
+# Создание объекта TfidfVectorizer
+tfidf_vectorizer = TfidfVectorizer()
+
+# Преобразование текста в TF-IDF векторное представление
+tfidf_matrix = tfidf_vectorizer.fit_transform(text)
+
+# Вывод TF-IDF векторного представления
+print(tfidf_matrix.toarray())
+
+
+Этот код создает объект TfidfVectorizer и использует его для преобразования текста в векторное представление с помощью метода TF-IDF. Результатом будет матрица, содержащая TF-IDF значения для каждого слова в каждом предложении.
+
+
+
+
+
+from bs4 import BeautifulSoup as BS
+import requests
+def unite1(nu):
+    un = ""
+    for i in nu:
+        un += i
+    return un
+def unite2(ne):
+    en = []
+    for i in ne:
+        en = en + i
+    return en
+import codecs
+import re
+divs = []
+#https://brobank.ru/banki/tinkoff/comments/comment-page-2/#comments
+for num_page in range(1):
+    #url = 'https://brobank.ru/banki/tinkoff/comments/comment-page-' + str(num_page) + '/#comments'
+    url = 'https://bankiros.ru/bank/tcs/otzyvy?limit=100'
+    page = requests.get(url)
+    print(page.status_code)
+    html_page = BS(page.content, "html.parser")
+    div = html_page.find_all("p", attrs = {"class": "xxx-reviews-card__content"})
+    div1 = []
+    for i in div:
+        y = i.text
+        div1 += [y]
+    divs += [div1]
+file = open('save1_utf-8.txt', 'w', encoding='utf-8')
+file.write(unite1(unite2(divs)))
+
+
+
+
+
+
+
+
+
